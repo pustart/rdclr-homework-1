@@ -1,0 +1,22 @@
+name: Deploy subfolder to GH Actions
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  deploy:
+    name: Place subfolder to deploy branch
+    runs-on: ubuntu-latest
+    steps:
+
+    # Any prerequisite steps
+    - uses: actions/checkout@master
+
+    # Deploy to local repo
+    - name: Deploy
+      uses: s0/git-publish-subdir-action@develop
+      env:
+        REPO: self
+        BRANCH: deploy/gh-pages
+        FOLDER: prod
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
