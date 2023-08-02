@@ -35,6 +35,7 @@
     "gulp-webp": "^4.0.1",
     "gulp-webp-html": "^1.0.2",
     "gulp-webpcss": "^1.1.1",
+    "path": "^0.12.7",
     "postcss": "^8.4.4",
     "postcss-csso": "^6.0.0",
     "postcss-import": "^14.0.2",

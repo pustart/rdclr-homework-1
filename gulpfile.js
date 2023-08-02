@@ -1,3 +1,4 @@
+import path from 'path';
 import sync from 'browser-sync';
 import del from 'del';
 import gulp from 'gulp';
@@ -25,12 +26,12 @@ let isBuildFlag = false;
 const sass = gulpSass(dartSass);
 const projectFolder = 'prod';
 const sourceFolder = 'src';
-const path = {
+const paths = {
   build: {
     html: projectFolder + '/',
     css: projectFolder + '/styles/',
     img: projectFolder + '/public/',
-    fonts: projectFolder + '/fonts/',
+    fonts: path.join(projectFolder, 'fonts'),
   },
 
   src: {
@@ -63,25 +64,25 @@ export const browserSync = () => {
 };
 
 export const html = () => {
-  return gulp.src(path.src.pug)
+  return gulp.src(paths.src.pug)
     .pipe(plumber())
     .pipe(pug({
       verbose: true,
     }))
-    .pipe(gulp.dest(path.build.html))
-    .pipe(gulp.src(path.src.html))
+    .pipe(gulp.dest(paths.build.html))
+    .pipe(gulp.src(paths.src.html))
     .pipe(plumber())
     .pipe(fileInclude())
     .pipe(gulpIf(isBuildFlag, removeHtml()))
     .pipe(gulpIf(isBuildFlag, htmlMin({
       removeComments: true,
     })))
-    .pipe(gulp.dest(path.build.html))
+    .pipe(gulp.dest(paths.build.html))
     .pipe(sync.stream());
 };
 
 export const css = () => {
-  return gulp.src(path.src.css, { sourcemaps: !isBuildFlag })
+  return gulp.src(paths.src.css, { sourcemaps: !isBuildFlag })
     .pipe(plumber())
     .pipe(sass({
       outputStyle: 'expanded'
@@ -91,45 +92,37 @@ export const css = () => {
       minmax,
     ]))
     .pipe(groupMedia())
-    .pipe(gulp.dest(path.build.css, { sourcemaps: !isBuildFlag }))
+    .pipe(gulp.dest(paths.build.css, { sourcemaps: !isBuildFlag }))
     .pipe(sync.stream());
 };
 
 export const images = () => {
-  return gulp.src(path.src.img)
+  return gulp.src(paths.src.img)
     .pipe(plumber())
     .pipe(webp())
-    .pipe(gulp.dest(path.build.img))
-    .pipe(gulp.src(path.src.img))
+    .pipe(gulp.dest(paths.build.img))
+    .pipe(gulp.src(paths.src.img))
     .pipe(gulpIf(isBuildFlag, imagemin({
       progressive: true,
       verbose: true,
       optimizationLevel: 3
     })))
-    .pipe(gulp.dest(path.build.img));
+    .pipe(gulp.dest(paths.build.img));
 };
 
-const fonts = () => {
-  return gulp.src(path.src.fonts)
+export const fonts = () => {
+  return gulp.src(paths.src.fonts)
     .pipe(plumber())
     .pipe(fonter({
       formats: ['ttf', 'woff']
     }))
-    .pipe(gulp.dest(path.build.fonts))
+    .pipe(gulp.dest(paths.build.fonts))
     .pipe(ttf2woff2())
-    .pipe(gulp.dest(path.build.fonts));
+    .pipe(gulp.dest(paths.build.fonts));
 };
 
 export const clean = () => {
-  if (isBuildFlag) {
-    return del(path.clean);
-  }
-
-  return del([path.clean, `!./${projectFolder}/fonts/**`]);
-};
-
-export const cleanFonts = () => {
-  return del(path.build.fonts);
+  return del(paths.clean);
 };
 
 const setMode = (isBuild) => {
@@ -140,10 +133,10 @@ const setMode = (isBuild) => {
 };
 
 export const watchFiles = () => {
-  gulp.watch([path.watch.html], html);
-  gulp.watch([path.watch.pug], pug);
-  gulp.watch([path.watch.css], css);
-  gulp.watch([path.watch.img], images);
+  gulp.watch([paths.watch.html], html);
+  gulp.watch([paths.watch.pug], pug);
+  gulp.watch([paths.watch.css], css);
+  gulp.watch([paths.watch.img], images);
 };
 
 const watch = gulp.parallel(
@@ -156,7 +149,6 @@ const dev = gulp.parallel(
   images);
 
 export const build = gulp.series(
-  cleanFonts,
   clean,
   setMode(true),
   dev,
@@ -168,5 +160,3 @@ export default gulp.series(
   dev,
   watch,
 );
-
-export const fnts = gulp.series(cleanFonts, fonts);
