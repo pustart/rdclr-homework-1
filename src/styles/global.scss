@@ -56,5 +56,13 @@ ul {
 body {
   margin: 0;
   padding: 0;
-  @include utils.font(1rem, 600, 1.5rem)
+  background-color: tomato;
+  @include utils.font(1rem, 400, 1.5rem);
+  @include utils.flex(column, center, space-between);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  font-size: inherit;
 }
