@@ -26,6 +26,7 @@ jobs:
       - name: Commit builded files
         run: |
           git config --local user.name  ${{ github.actor }}
+          git config --local user.email "polaris9955@gmail.com"
           git add -A
           git commit -m "build: update gulp output files"
 
