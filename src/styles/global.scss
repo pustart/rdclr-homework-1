@@ -18,6 +18,7 @@ html {
   --dark: #3B4050;
   --light: #F1F1F1;
   --gold: #A59678;
+  --weak: #FFF;
 }
 
 blockquote,
@@ -56,7 +57,7 @@ ul {
 body {
   margin: 0;
   padding: 0;
-  background: var(--light);
+  background: var(--weak);
   @include utils.font(1rem, 400, 1.5rem);
   @include utils.flex(column, center, space-between);
 }
@@ -65,4 +66,14 @@ a {
   color: inherit;
   text-decoration: none;
   font-size: inherit;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  border: none;
+  font-size: inherit;
+  text-decoration: none;
 }
