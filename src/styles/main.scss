@@ -1,4 +1,11 @@
 @use 'utils';
+@use 'default';
+
+@mixin page_content {
+  max-width: 1600px;
+  padding-inline: 4rem;
+  margin: 0 auto;
+}
 
 .header {
   background: var(--header-dark);
@@ -8,10 +15,8 @@
 
 .nav {
   @include utils.flex(row, center, flex-end);
-
-  max-width: 1440px;
-  padding: 2.22% 4.44%;
-  margin: 0 auto;
+  @include page_content;
+  padding-block: 2rem;
 
   &__list {
     @include utils.flex(row, center, space-between);
@@ -32,5 +37,36 @@
       transform: scaleX(1);
       transform-origin: bottom left;
     }
+  }
+}
+
+.hero {
+  width: 100vw;
+  background: var(--dark);
+  color: var(--light);
+
+  &__article {
+    @include utils.flex(row, center, space-between);
+    @include page_content;
+
+    padding-block: 8rem;
+    gap: 4.44rem;
+  }
+
+  &__content {
+    max-width: 20.875rem;
+    margin: 0 auto;
+  }
+
+  &__title {
+    @include utils.font(4rem, 600, 4.5rem);
+
+    max-width: 32.125rem;
+  }
+
+  &__button {
+    @extend %default_button;
+
+    margin-top: 1.5rem;
   }
 }

@@ -1,1 +1,22 @@
+@use 'utils';
 
+%default_button {
+  @include utils.flex(column, center, center);
+  @include utils.font(1rem, 700, 1.5rem);
+
+  border-radius: 1rem;
+  background: var(--gold);
+  color: var(--light);
+  padding: 0.5rem 1.5rem;
+
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+
+  &:active {
+    transform: scale(0.92);
+  }
+
+  &:hover {
+    color: var(--dark);
+  }
+}
