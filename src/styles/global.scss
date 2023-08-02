@@ -56,6 +56,7 @@ ul {
 body {
   margin: 0;
   padding: 0;
+  background: var(--light);
   @include utils.font(1rem, 400, 1.5rem);
   @include utils.flex(column, center, space-between);
 }
