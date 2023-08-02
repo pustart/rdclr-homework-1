@@ -45,6 +45,10 @@ jobs:
     # Any prerequisite steps
     - uses: actions/checkout@master
 
+    - name: Increase Git buffer
+        run: |
+          git config --global http.postBuffer 157286400
+
     # Deploy to local repo
     - name: Deploy
       uses: s0/git-publish-subdir-action@develop
