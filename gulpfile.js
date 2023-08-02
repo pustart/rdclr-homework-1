@@ -156,6 +156,7 @@ const dev = gulp.parallel(
   images);
 
 export const build = gulp.series(
+  cleanFonts,
   clean,
   setMode(true),
   dev,
