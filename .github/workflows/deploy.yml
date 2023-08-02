@@ -19,6 +19,10 @@ jobs:
       - name: Install deps
         run: npm ci --force
 
+      - name: Autocrlf config
+        run: git config core.autocrlf input
+
+
       - name: Gulp build
         run: npm run build
 
