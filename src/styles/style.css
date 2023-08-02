@@ -1,2 +1,5 @@
-@import url('normalize.scss');
-@import url('global.scss');
+@import url('normalize.css');
+@import url('fonts.css');
+@import url('global.css');
+@import url('default.css');
+@import url('main.css');

@@ -10,7 +10,7 @@
     "build": "gulp build"
   },
   "lint-staged": {
-    "/src": [
+    "./src": [
       "npm run build",
       "git add"
     ]

@@ -1,0 +1,36 @@
+@use 'utils';
+
+.header {
+  background: var(--header-dark);
+  color: var(--light);
+  width: 100vw;
+}
+
+.nav {
+  @include utils.flex(row, center, flex-end);
+
+  max-width: 1440px;
+  padding: 2.22% 4.44%;
+  margin: 0 auto;
+
+  &__list {
+    @include utils.flex(row, center, space-between);
+    @include utils.font(1rem, 600, 1.5rem);
+
+    gap: 2rem;
+    text-transform: uppercase;
+  }
+
+  &__link {
+    position: relative;
+
+    &::after {
+      @extend %pseudo_underline;
+    }
+
+    &:hover::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+  }
+}

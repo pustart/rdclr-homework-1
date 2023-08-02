@@ -4,6 +4,34 @@ on:
     branches: [ "master" ]
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Delete husky
+        run: npm pkg delete scripts.prepare --force
+
+      - name: Install deps
+        run: npm ci --force
+
+      - name: Gulp build
+        run: npm run build
+
+      - name: Commit builded files
+        run: |
+          git config --local user.name  ${{ github.actor }}
+          git add -A
+          git commit -m "build: update gulp output files"
+          
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          # force: true
+
   deploy:
     name: Place subfolder to deploy branch
     runs-on: ubuntu-latest
