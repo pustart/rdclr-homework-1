@@ -1,4 +1,3 @@
-import path from 'path';
 import sync from 'browser-sync';
 import del from 'del';
 import gulp from 'gulp';
@@ -31,7 +30,7 @@ const paths = {
     html: projectFolder + '/',
     css: projectFolder + '/styles/',
     img: projectFolder + '/public/',
-    fonts: path.join(projectFolder, 'fonts'),
+    fonts: projectFolder + '/fonts/',
   },
 
   src: {
@@ -110,7 +109,7 @@ export const images = () => {
     .pipe(gulp.dest(paths.build.img));
 };
 
-export const fonts = () => {
+const fonts = () => {
   return gulp.src(paths.src.fonts)
     .pipe(plumber())
     .pipe(fonter({
@@ -122,7 +121,11 @@ export const fonts = () => {
 };
 
 export const clean = () => {
-  return del(paths.clean);
+  return del([paths.clean, `!./${projectFolder}/fonts/**`]);
+};
+
+export const cleanFonts = () => {
+  return del(paths.build.fonts);
 };
 
 const setMode = (isBuild) => {
@@ -152,7 +155,6 @@ export const build = gulp.series(
   clean,
   setMode(true),
   dev,
-  fonts,
 );
 
 export default gulp.series(
@@ -160,3 +162,5 @@ export default gulp.series(
   dev,
   watch,
 );
+
+export const fnts = gulp.series(cleanFonts, fonts);
