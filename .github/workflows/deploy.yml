@@ -43,11 +43,12 @@ jobs:
     steps:
 
     # Any prerequisite steps
+    - name: Checkout
     - uses: actions/checkout@master
 
     - name: Increase Git buffer
-        run: |
-          git config --global http.postBuffer 157286400
+      run: |
+        git config --global http.postBuffer 157286400
 
     # Deploy to local repo
     - name: Deploy
