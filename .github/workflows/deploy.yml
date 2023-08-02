@@ -2,6 +2,9 @@ name: Deploy subfolder to GH Actions
 on:
   push:
     branches: [ "master" ]
+    paths:
+      - 'src/**'
+      - '.github/**'
 
 jobs:
   build:
