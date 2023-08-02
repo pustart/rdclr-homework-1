@@ -25,7 +25,7 @@ jobs:
           git config --local user.name  ${{ github.actor }}
           git add -A
           git commit -m "build: update gulp output files"
-          
+
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
@@ -34,6 +34,7 @@ jobs:
 
   deploy:
     name: Place subfolder to deploy branch
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
 

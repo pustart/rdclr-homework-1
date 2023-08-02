@@ -160,7 +160,7 @@ export const build = gulp.series(
   setMode(true),
   dev,
   fonts,
-  browserSync);
+);
 
 export default gulp.series(
   clean,
