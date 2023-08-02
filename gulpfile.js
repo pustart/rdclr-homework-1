@@ -113,7 +113,7 @@ const fonts = () => {
   return gulp.src(path.src.fonts)
     .pipe(plumber())
     .pipe(fonter({
-      formats: ['ttf', 'eot', 'woff', 'svg']
+      formats: ['ttf', 'woff']
     }))
     .pipe(gulp.dest(path.build.fonts))
     .pipe(ttf2woff2())
