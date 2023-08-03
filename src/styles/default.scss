@@ -21,3 +21,29 @@
     color: var(--dark);
   }
 }
+
+.info-card {
+  @include utils.flex(column, center, space-between);
+
+  &__title {
+    color: inherit;
+    @include utils.font(1.5rem, 700, 2rem);
+  }
+
+  &__text {
+    text-align: center;
+  }
+}
+
+.link-decorated {
+  position: relative;
+
+  &::after {
+    @extend %pseudo_underline;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+}
