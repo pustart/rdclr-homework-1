@@ -55,6 +55,7 @@ export const browserSync = () => {
   sync.init({
     ui: false,
     notify: false,
+    open: false,
     browser: 'chrome',
     server: {
       baseDir: './' + projectFolder + '/'
