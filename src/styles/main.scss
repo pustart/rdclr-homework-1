@@ -14,6 +14,19 @@
   margin: 0 auto;
 }
 
+.info-card {
+  @include utils.flex(column, center, space-between);
+
+  &__title {
+    color: inherit;
+    @include utils.font(1.5rem, 700, 2rem);
+  }
+
+  &__text {
+    text-align: center;
+  }
+}
+
 .header {
   background: var(--header-dark);
   color: var(--light);
@@ -87,8 +100,8 @@
     margin: 0;
 
     @include media.desktop {
-        margin: 0 auto;
-      }
+      margin: 0 auto;
+    }
   }
 
   &__title {
@@ -105,5 +118,45 @@
     @extend %default_button;
 
     margin-top: 1.5rem;
+  }
+}
+
+.features {
+  width: 100vw;
+  background: var(--light);
+  color: var(--header-dark);
+
+  &__content {
+    @include page_content_mobile;
+    padding-block: 3rem;
+
+    @include media.desktop {
+      @include page_content_desktop;
+
+      padding-block: 2rem;
+    }
+  }
+}
+
+.features-list {
+  @include utils.flex(column, center, space-between);
+  gap: 2.5rem;
+
+  &__info-card {
+    gap: 1rem;
+
+    @include media.desktop {
+      padding-block: 2rem;
+    }
+  }
+
+  &__title {
+    color: var(--gold);
+  }
+
+  @include media.desktop {
+    @include utils.flex(row, center, space-between);
+
+    gap: 7rem;
   }
 }
