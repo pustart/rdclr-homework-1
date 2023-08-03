@@ -17,6 +17,8 @@ html {
   --light: #F1F1F1;
   --gold: #A59678;
   --weak: #FFF;
+  --desktop-breakpoint: 1024px;
+  --desktop-max: 1600px;
 }
 
 blockquote,
