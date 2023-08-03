@@ -67,22 +67,38 @@
   color: var(--light);
 
   &__article {
-    @include utils.flex(row, center, space-between);
-    @include page_content_desktop;
+    @include utils.flex(column, flex-start, space-between);
+    @include page_content_mobile;
 
-    padding-block: 8rem;
-    gap: 4.44rem;
+    padding-block: 3rem;
+    gap: 2rem;
+
+    @include media.desktop {
+      @include utils.flex(row, center, space-between);
+      @include page_content_desktop;
+
+      padding-block: 8rem;
+      gap: 4.44rem;
+    }
   }
 
   &__content {
     max-width: 20.875rem;
-    margin: 0 auto;
+    margin: 0;
+
+    @include media.desktop {
+        margin: 0 auto;
+      }
   }
 
   &__title {
-    @include utils.font(4rem, 600, 4.5rem);
+    @include utils.font(2rem, 600, 3rem);
 
     max-width: 32.125rem;
+
+    @include media.desktop {
+      @include utils.font(4rem, 600, 4.5rem);
+    }
   }
 
   &__button {
