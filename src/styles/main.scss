@@ -27,6 +27,19 @@
   }
 }
 
+.link-decorated {
+  position: relative;
+
+  &::after {
+    @extend %pseudo_underline;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+}
+
 .header {
   background: var(--header-dark);
   color: var(--light);
@@ -50,19 +63,6 @@
 
     @include media.desktop {
       width: auto;
-    }
-  }
-
-  &__link {
-    position: relative;
-
-    &::after {
-      @extend %pseudo_underline;
-    }
-
-    &:hover::after {
-      transform: scaleX(1);
-      transform-origin: bottom left;
     }
   }
 
@@ -221,5 +221,78 @@
     @include media.desktop {
       width: 19.5rem;
     }
+  }
+}
+
+.footer {
+  width: 100vw;
+  background: var(--header-dark);
+  color: var(--light);
+
+  &__content {
+    @include utils.flex(column, center, space-between);
+    @include page_content_mobile;
+
+    padding-block: 4.5rem;
+    gap: 2.5rem;
+
+    @include media.desktop {
+      @include page_content_desktop;
+
+      padding-block: 6rem;
+      gap: 4rem;
+    }
+  }
+
+  &__main-title {
+    @include utils.font(2rem, 700, 2.5rem);
+
+    @include media.desktop {
+      @include utils.font(3rem, 700, 4rem);
+    }
+  }
+
+  &__info {
+    @include utils.flex(column, flex-start, space-between);
+
+    gap: 2rem;
+    width: 100%;
+
+    @include media.desktop {
+      @include utils.flex(row, center, space-between);
+      gap: 10.12rem;
+    }
+  }
+
+  &__title {
+    @include utils.font(1.125rem, 700, 1.5rem);
+
+    white-space: nowrap;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+
+  &__text {
+    @include utils.font(1rem, 400, 1.5rem);
+
+    @include media.desktop {
+        max-width: 23.3125rem;
+      }
+  }
+}
+
+.nav-block {
+  &__title {
+    @include utils.font(1.125rem, 700, 1.5rem);
+
+    white-space: nowrap;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+
+  &__list {
+    @include utils.flex(column, flex-start, space-between);
+
+    gap: 0.75rem;
   }
 }
