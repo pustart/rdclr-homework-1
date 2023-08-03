@@ -1,9 +1,16 @@
 @use 'utils';
 @use 'default';
+@use 'media';
 
-@mixin page_content {
-  max-width: 1600px;
+@mixin page_content_desktop {
+  max-width: var(--desktop-max);
   padding-inline: 4rem;
+  margin: 0 auto;
+}
+
+@mixin page_content_mobile {
+  max-width: var(--desktop-breakpoint);
+  padding-inline: 1.5rem;
   margin: 0 auto;
 }
 
@@ -14,16 +21,23 @@
 }
 
 .nav {
-  @include utils.flex(row, center, flex-end);
-  @include page_content;
-  padding-block: 2rem;
+  @include utils.flex(row, center, center);
+  @include page_content_mobile;
+
+  padding-inline: 3.12rem;
+  padding-block: 1rem;
 
   &__list {
     @include utils.flex(row, center, space-between);
     @include utils.font(1rem, 600, 1.5rem);
 
+    width: 100%;
     gap: 2rem;
     text-transform: uppercase;
+
+    @include media.desktop {
+      width: auto;
+    }
   }
 
   &__link {
@@ -38,6 +52,13 @@
       transform-origin: bottom left;
     }
   }
+
+  @include media.desktop {
+    @include utils.flex(row, center, flex-end);
+    @include page_content_desktop;
+
+    padding-block: 2rem;
+  }
 }
 
 .hero {
@@ -47,7 +68,7 @@
 
   &__article {
     @include utils.flex(row, center, space-between);
-    @include page_content;
+    @include page_content_desktop;
 
     padding-block: 8rem;
     gap: 4.44rem;
